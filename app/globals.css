@@ -1,26 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #000000;
+  --bg-dark: #0D0D0D;
+  --neon-green: #00FF41;
+  --neon-cyan: #00FFFF;
+  --neon-green-dim: #00cc33;
+  --text-muted: #4a4a4a;
+  --border: #1a1a1a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--neon-green);
+  font-family: 'JetBrains Mono', 'Share Tech Mono', monospace;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: var(--neon-green); }
+
+.neon-text {
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green), 0 0 20px var(--neon-green-dim);
+}
+
+.neon-cyan {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan), 0 0 20px rgba(0,255,255,0.4);
+}
+
+.neon-border {
+  border: 1px solid var(--neon-green);
+  box-shadow: 0 0 8px rgba(0,255,65,0.3), inset 0 0 8px rgba(0,255,65,0.05);
+}
+
+.neon-card {
+  background: rgba(0,255,65,0.02);
+  border: 1px solid rgba(0,255,65,0.2);
+  transition: all 0.3s ease;
+}
+
+.neon-card:hover {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 20px rgba(0,255,65,0.2), inset 0 0 20px rgba(0,255,65,0.05);
+  background: rgba(0,255,65,0.05);
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.12) 2px,
+    rgba(0,0,0,0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes glitch1 {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+  10% { clip-path: inset(10% 0 60% 0); transform: translate(-4px, 2px); }
+  20% { clip-path: inset(40% 0 20% 0); transform: translate(4px, -2px); }
+  30% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 1px); }
+  40% { clip-path: inset(20% 0 70% 0); transform: translate(2px, -1px); }
+  50% { clip-path: inset(60% 0 15% 0); transform: translate(-3px, 2px); }
+  60% { clip-path: inset(5% 0 85% 0); transform: translate(3px, -2px); }
+  70% { clip-path: inset(80% 0 5% 0); transform: translate(-1px, 1px); }
+  80% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -1px); }
+  90% { clip-path: inset(50% 0 30% 0); transform: translate(-2px, 2px); }
+}
+
+@keyframes glitch2 {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+  15% { clip-path: inset(50% 0 30% 0); transform: translate(4px, -2px); }
+  30% { clip-path: inset(15% 0 65% 0); transform: translate(-4px, 2px); }
+  45% { clip-path: inset(75% 0 5% 0); transform: translate(3px, -1px); }
+  60% { clip-path: inset(25% 0 55% 0); transform: translate(-3px, 1px); }
+  75% { clip-path: inset(55% 0 25% 0); transform: translate(2px, -2px); }
+  90% { clip-path: inset(5% 0 75% 0); transform: translate(-2px, 2px); }
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+.grid-bg {
+  background-image: radial-gradient(rgba(0,255,65,0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.btn-neon {
+  background: transparent;
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-neon:hover {
+  background: rgba(0,255,65,0.1);
+  box-shadow: 0 0 20px rgba(0,255,65,0.4), inset 0 0 20px rgba(0,255,65,0.1);
+}
+
+.btn-neon-cyan {
+  background: transparent;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-neon-cyan:hover {
+  background: rgba(0,255,255,0.1);
+  box-shadow: 0 0 20px rgba(0,255,255,0.4), inset 0 0 20px rgba(0,255,255,0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
